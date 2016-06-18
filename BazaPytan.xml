@@ -1,0 +1,2270 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfProblem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Problem>
+    <Kod />
+    <Opis>Dana jest nastepujaca definicja zmiennych:
+int kk, &amp;ll=kk, &amp;mm=ll;
+    </Opis>
+    <Pytania>
+      <Pytanie>
+        <Tresc>Czy po wykonaniu nastepujacych operacji:
+	kk=2;
+	ll=5;
+	mm=7;
+zmienna kk bedzie miala wartosc 7 ?
+  </Tresc>
+        <Odpowiedz>true</Odpowiedz>
+        <Notatka>referencja oznacza, ze ll i mm to tak jakby druga nazwa dla kk.
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>Czy spelniony jest ponizszy warunek?
+&amp;kk == &amp;mm
+  </Tresc>
+        <Odpowiedz>true</Odpowiedz>
+        <Notatka>(&amp; oznacza adres) ale mm i kk to ten sam obiekt, wiec adresy sa takie same
+  </Notatka>
+      </Pytanie>
+    </Pytania>
+  </Problem>
+  <Problem>
+    <Kod />
+    <Opis>Nastepne pytanie dotyczyc bedzie referencji i zmiennych
+referencyjnych:
+    </Opis>
+    <Pytania>
+      <Pytanie>
+        <Tresc>Czy poprawne jest stwierdzenie:
+Przekazywanie parametru funkcji przez referencje polega na tym, ze do funkcji
+przekazywany jest parametr aktualny, a nie tylko jego wartosc. Dzieki temu
+zmiany wartosci parametru w funkcji sa widziane rowniez na "zewnatrz" tej
+funkcji.
+  </Tresc>
+        <Odpowiedz>true</Odpowiedz>
+        <Notatka>aktualny parametr - w sensie parametr, po prostu, nie jego kopia
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>Czy poprawne jest stwierdzenie:
+Jako wynik funkcji wolno przekazywac referencje do zmiennych lokalnych tej
+funkcji, poniewaz zmienne te istnieja caly czas podczas dzialania danej funkcji.
+  </Tresc>
+        <Odpowiedz>false</Odpowiedz>
+        <Notatka>Nie, bo referencja wskazywalaby na nieisteniejaca juz zmienna czyli
+potencjalne smieci.
+main.cpp:6:5: warning: reference to local variable ‘a’ returned
+  </Notatka>
+      </Pytanie>
+    </Pytania>
+  </Problem>
+  <Problem>
+    <Kod />
+    <Opis>Pytanie dotyczyc bedzie przeciazania funkcji i metod.
+    </Opis>
+    <Pytania>
+      <Pytanie>
+        <Tresc>Czy funkcje przeciazone to funkcje majace wspolna sama nazwe (przy czym
+wielkosc liter jest nieistotna), lecz rozniace sie np. liczba parametrow lub typami
+parametrow?
+  </Tresc>
+        <Odpowiedz>false</Odpowiedz>
+        <Notatka>beda to dwie rózne funkcje
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>Czy prawdziwe jest stwierdzenie, ze w jezyku C++ mozna przeciazac funkcje, a
+nie mozna przeciazac operatorow arytmetycznych poza obrebem (definicji) danej
+klasy?
+  </Tresc>
+        <Odpowiedz>false</Odpowiedz>
+        <Notatka>mozna zrobic przeciazenia globalne; mozna w obrebie klasy
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>Czy poprawna jest nastepujaca definicja przeciazenia operatora przesuniecia
+bitowego dla strumienia
+wyjsciowego.
+std::ostream &amp;operator &amp;lt;&amp;lt; ( std::ostream &amp;strumien1, std::ostream &amp;strumien2 ){
+return strumien2;
+}
+  </Tresc>
+        <Odpowiedz>false</Odpowiedz>
+        <Notatka>Musi zwracac referncje do pierwszego parametru (patrz wyklady) ew. rozwin
+funckje strumien1.operator&amp;lt;&amp;lt;(strumien2)
+  </Notatka>
+      </Pytanie>
+    </Pytania>
+  </Problem>
+  <Problem>
+    <Kod />
+    <Opis>Pytanie dotyczyc bedzie hermetyzacji danych i metod oraz funkcji
+zaprzyjaznionych
+
+    </Opis>
+    <Pytania>
+      <Pytanie>
+        <Tresc>Czy hermetyzacja komponentow klasy (pol lub metod) ma na celu zabezpieczenie
+ich przed modyfikacja lub wywolaniem przez inne metody tej samej klasy?
+  </Tresc>
+        <Odpowiedz>false</Odpowiedz>
+        <Notatka>chodzi o ochrone przed modyfikacja z zewnatrz
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>Czy metody prywatne (private) i chronione (protected) klasy dostepne sa dla
+funkcji zaprzyjaznionych z ta klasa?
+  </Tresc>
+        <Odpowiedz>true</Odpowiedz>
+        <Notatka>friend powoduje, ze dowolna funkcja spoza klasy ma do niej dostep jak
+metoda [wewnatrz klasy: “friend void Funkcja();” poza klasa: “void Funkcja() {
+… }”]
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>Czy dozwolona jest modyfikacja pol prywatnych danej klasy w funkcjach
+zaprzyjaznionych z ta klasa?
+  </Tresc>
+        <Odpowiedz>true</Odpowiedz>
+        <Notatka>mimo to nie jest to polecane rozwiazanie
+  </Notatka>
+      </Pytanie>
+    </Pytania>
+  </Problem>
+  <Problem>
+    <Kod />
+    <Opis>Pytanie dotyczyc bedzie konstruktorow i destruktorow.
+    </Opis>
+    <Pytania>
+      <Pytanie>
+        <Tresc>Czy prawdziwe jest ponizsze stwierdzenie:
+Jezeli dla klasy "Telefon" nie zostal zdefiniowany zaden konstruktor, to czy
+definiujac zmienne w programie glownym tak jak jest to przedstawione ponizej:
+Telefon obTel;
+zostanie wywolany konstruktor kopiujacy?
+  </Tresc>
+        <Odpowiedz>false</Odpowiedz>
+        <Notatka>konstruktor kopiujacy kopiuje wartosc innej zmiennej tego typu i przypisuje
+ja do obTel. W tym miejscu, nie ma skad kopiowac wartosci. Aby domyslnie uzyc
+konstruktora kopiujacego, trzeba by zadeklarowac zmienna tak: “Telefon obTel
+= inny_telefon;” przy zalozeniu, ze inny_telefon tez jest typu Telefon i zostal
+wczesniej zadeklarowany.
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>Czy jedna z operacji powodujacej niejawne wywolanie konstruktora danej klasy
+jest dynamiczna alokacja obiektu tejze klasy za pomoca operatora "new" ?
+  </Tresc>
+        <Odpowiedz>true</Odpowiedz>
+        <Notatka />
+      </Pytanie>
+      <Pytanie>
+        <Tresc>Czy w przypadku obiektow definiowanych lokalnie (np. w metodzie lub funkcji)
+destruktory zawsze wywolywane sa niejawnie gdy sterowanie osiagnie koniec
+zakresu waznosci definicji danego obiektu? Przyklad definiowania lokalnego
+obiektu "Suma":
+	void Dodaj(LZespolona Z1, LZespolona Z2){
+		LZespolona Suma;
+		...
+	}
+  </Tresc>
+        <Odpowiedz>true</Odpowiedz>
+        <Notatka>jak utworzymy obiekt wewnatrz funkcji to zniknie on, gdy sie funkcja
+skonczy (nie program).
+  </Notatka>
+      </Pytanie>
+    </Pytania>
+  </Problem>
+  <Problem>
+    <Kod />
+    <Opis>Czy prawda jest, ze:
+Destruktor powinien miec taka sama liste parametrow w wywolaniu jak
+konstruktor.
+    </Opis>
+    <Pytania>
+      <Pytanie>
+        <Tresc />
+        <Odpowiedz>false</Odpowiedz>
+        <Notatka>destruktory sa bezparametryczne, zawsze
+
+  </Notatka>
+      </Pytanie>
+    </Pytania>
+  </Problem>
+  <Problem>
+    <Kod />
+    <Opis>Niech bedzie dana definicja klasy:
+	class LZespolona {
+		private:
+			double _re, _im;
+		public:
+		LZespolona() {
+			_re = _im = 0;
+		}
+	};
+	</Opis>
+    <Pytania>
+      <Pytanie>
+        <Tresc>Czy klasa ta zawiera konstruktor kopiujacy (jawny lub niejawny, o ile taki moze
+istniec w tym przypadku).
+  </Tresc>
+        <Odpowiedz>true</Odpowiedz>
+        <Notatka>kazda klasa ma zawsze konstruktor kopiujacy
+  </Notatka>
+      </Pytanie>
+    </Pytania>
+  </Problem>
+  <Problem>
+    <Kod />
+    <Opis>Czy konstruktor ...
+    </Opis>
+    <Pytania>
+      <Pytanie>
+        <Tresc>... jest metoda skladowa klasy, ktora zawsze inicjalizuje pola tej klasy?
+  </Tresc>
+        <Odpowiedz>false</Odpowiedz>
+        <Notatka>jest skladowa, ale nie musi inicjalizowac pól klasy!
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>... ma taka sama nazwe jak nazwa klasy i moze byc wywolany jawnie jak kazda
+metoda.
+  </Tresc>
+        <Odpowiedz>true</Odpowiedz>
+        <Notatka>(pytanie odnosi sie do jednorazowego wywolania); musi sie nazywac
+dokladnie tak samo, nie moze miec typu (nawet void), moze byc wywolany
+jawnie, ale nie w ten sam sposób, co zwykla metoda[nie da sie zrobic na juz
+utworzonym obiekcie Obiekt.Obiekt() ]. Wywylanie konstryktora po jawnie na
+obiekcie powoduje:
+main.cpp:18:3: error: invalid use of ‘Obiekt::Obiekt’
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>... moze byc zadeklarowany w ponizszy sposob:
+class Klasa {
+Klasa(Klasa);
+public:
+};
+  </Tresc>
+        <Odpowiedz>false</Odpowiedz>
+        <Notatka>nie moze byc zadeklarowany w sekcji private, ani protected (domyslny dla
+klasy jest private). Musi miec cos wewnatrz {}, choc moze to byc zadeklarowane
+w pliku cpp, tak jak zwykla metoda “ Klasa::Klasa(argument) { … }”
+  </Notatka>
+      </Pytanie>
+    </Pytania>
+  </Problem>
+  <Problem>
+    <Kod />
+    <Opis>Czy przeciazanie metod klasy ...
+    </Opis>
+    <Pytania>
+      <Pytanie>
+        <Tresc>... jest mozliwe tylko poza sekcja chroniona (protected) danej klasy.
+  </Tresc>
+        <Odpowiedz>false</Odpowiedz>
+        <Notatka>wewnatrz sekcji chronionej takze mozna (nie mozna za to w private)
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>... jest zabronione w przypadku destruktora.
+  </Tresc>
+        <Odpowiedz>true</Odpowiedz>
+        <Notatka>destruktor moze byc tylko jeden (napewno? [edit. TAK]). “Destruktor
+parametryczny” powoduje
+main.cpp:8:10: error: destructors may not have parameters
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>... wykorzystujace argumenty domyslne moze prowadzic do niejednoznacznosci,
+tzn. z zapisu wywolania metody bez znajomosci wartosci argumentow
+domyslnych nie bedzie mozna stwierdzic, ktora metoda bedzie wywolana? Pytanie
+dotyczy definicji w programie, ktory kompiluje sie poprawnie i nie wystepuja
+zadne ostrzezenia.
+  </Tresc>
+        <Odpowiedz>true</Odpowiedz>
+        <Notatka>patrzaj wyklady (hermetyzacja i przeciazenia)
+  </Notatka>
+      </Pytanie>
+    </Pytania>
+  </Problem>
+  <Problem>
+    <Kod />
+    <Opis>Niech bedzie dana definicja:
+	int numer::funkcja(int i){
+	…
+	}
+Czy prawda jest, ze ...
+    </Opis>
+    <Pytania>
+      <Pytanie>
+        <Tresc>... moze to byc definicja metody klasy lub struktury lub tez unii o
+nazwie "numer"?
+  </Tresc>
+        <Odpowiedz>true</Odpowiedz>
+        <Notatka>nawet musi ;] … jak musi to nie moze xD
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>jezeli jest to metoda klasy "numer", to jej definicja jest umieszczona na pewno
+poza blokiem definicji tej klasy?
+  </Tresc>
+        <Odpowiedz>true</Odpowiedz>
+        <Notatka>inaczej nie moglaby miec tego “numer::”
+  </Notatka>
+      </Pytanie>
+    </Pytania>
+  </Problem>
+  <Problem>
+    <Kod />
+    <Opis>Mamy zdefiniowana klase "Owoc" i jej klase pochodna "Jablko":
+	class Owoc {
+		int _Waga;
+		public:
+		Owoc(int a) {
+			_Waga = a;
+		};
+	};
+	class Jablko : public Owoc {
+		public:
+		int Oblicz();
+	};
+Czy prawda jest, ze ...
+	Jablko jab(2);
+    </Opis>
+    <Pytania>
+      <Pytanie>
+        <Tresc>... Obiekt "jab" nie bedzie mogl byc utworzony ze wzgledu na brak konstruktora
+parametrycznego w klasie "Jablko"?
+  </Tresc>
+        <Odpowiedz>true</Odpowiedz>
+        <Notatka>Jablko ma tylko konstruktor domyslny
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>... zapis jest poprawny i dziedziczone pole "_Waga" zostanie zainicjalizowane
+wartoscia 2?
+  </Tresc>
+        <Odpowiedz>false</Odpowiedz>
+        <Notatka>bo patrz wyzej
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>... zapis definicji obiektu "jab" jest poprawny, jednak pole o nazwie "_Waga"
+klasy "Owoc" nie bedzie dostepne z poziomu metody klasy pochodnej ("Jablko")?
+  </Tresc>
+        <Odpowiedz>false</Odpowiedz>
+        <Notatka>bo klasa Jalbko nie posiada konstruktora przyjmujacego argument (liczbe)
+  </Notatka>
+      </Pytanie>
+    </Pytania>
+  </Problem>
+  <Problem>
+    <Kod />
+    <Opis>Mamy zdefiniowana klase "PojazdKolowy" oraz zadefiniowany jest
+obiekt 'PojK':
+class PojazdKolowy {
+public:
+int _IloscKol;
+};
+const PojazdKolowy PojK;
+Czy prawda jest, ze ...
+    </Opis>
+    <Pytania>
+      <Pytanie>
+        <Tresc>... powyzsza definicja obiektu 'PojK' bylaby poprawna, gdyby w klasie zostal
+zdefiniowany konstruktor bezparametryczny, np.
+class PojazdKolowy {
+public:
+int _IloscKol;
+PojazdKolowy() {}
+};
+  </Tresc>
+        <Odpowiedz>true</Odpowiedz>
+        <Notatka>gdy nie ma konstruktora, zmienna (stala) zostaje niezadeklarowana - nie
+kompiluje; consty musza byc zadeklarowane od razu
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>... obiekt nie jest inicjalizowany, tak wiec nie moze byc zadefiniowany jako staly.
+  </Tresc>
+        <Odpowiedz>true</Odpowiedz>
+        <Notatka>jak wywalimy “const” to pójdzie bez problemu
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>... powyzsza definicja obiektu 'PojK' bylaby poprawna, gdyby w klasie zostal
+zdefiniowany konstruktor postaci:
+class PojazdKolowy {
+public:
+int _IloscKol;
+PojazdKolowy(int Wartosc) {
+_IloscKol = Wartosc;
+}
+};
+  </Tresc>
+        <Odpowiedz>false</Odpowiedz>
+        <Notatka>bo nie ten konstruktor zostalby wywolany, tylko bezparametryczny - gdyz
+przy tworzeniu obiektu PojK nie podajemy zadnych argumentow!
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>... powyzsza definicja obiektu 'PojK' bylaby poprawna, gdyby pole '_IloscKol'
+zostalo zdefiniowane jako statyczne, tzn.:
+class PojazdKolowy {
+public:
+static int _IloscKol;
+};
+int PojazdKolowy::_IloscKol = 0;
+  </Tresc>
+        <Odpowiedz>false</Odpowiedz>
+        <Notatka>nadal potrzebny jest konstruktor bezparametryczny
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>... powyzsza definicja bylaby poprawna jesli odpowiednia instrukcja zainicjalizuje
+obiekt po jego utworzeniu zgodnie ze schematem, ktory jest stosowany, gdy nie
+jest uzywany modyfikator "const", tzn.:
+JakasKlasa Obiekt;
+jakas_instrukcja_inicjalizujaca_Obiekt;
+gdzie za napis "jakas_instrukcja_inicjalizujaca_Obiekt" trzeba podstawic
+odpowiednia instrukcje lub ciag instrukcji.
+  </Tresc>
+        <Odpowiedz>false</Odpowiedz>
+        <Notatka>musi byc zainincjalizowany od razu, nie mozna pózniej. Pózniej mozna jeynie
+zmienic wartosc, ale nie poleca sie tego rozwiazania [wg Sz.P.Prowadzacego]
+  </Notatka>
+      </Pytanie>
+    </Pytania>
+  </Problem>
+  <Problem>
+    <Kod />
+    <Opis>Mamy zdefiniowana klase "Ksiazka" oraz obiekt 'Ks':
+class Ksiazka {
+public:
+int _IloscStron;
+static int _IloscKsiazek;
+Ksiazka() {
+}
+};
+int Ksiazka::_IloscKsiazek = 0;
+int main(){
+const Ksiazka Ks;
+Ks._IloscStron = 100;
+Ks._IloscKsiazek = 4;
+}
+Czy prawda jest, ze ...
+    </Opis>
+    <Pytania>
+      <Pytanie>
+        <Tresc>... ze wzgledu na to, iz obiekt 'Ks' jest zdefiniowany jako staly, to obie operacje
+przypisania w funkcji 'main' sa niepoprawne.
+  </Tresc>
+        <Odpowiedz>false</Odpowiedz>
+        <Notatka>nie mozna zmienic wartosci stalej (_IloscStron), ale Pola statyczne mozna
+modyfikowac pomiomo faktu ze obiekt jest const. Dzieje sie tak, poniewaz pola
+statyczne naleza do klasy, a nie do danego obiektu i sa wspólne dla wszystkich
+obiektów danego typu. Zatem tylko pierwsza operacja jest zla, druga jest ok.
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>... obie operacje przypisania w funkcji "main" mozna zrealizowac pod warunkiem
+wykonania rzutowania za pomoca operatora static_cast.
+  </Tresc>
+        <Odpowiedz>false</Odpowiedz>
+        <Notatka>obiekt jest staly, ale mozna go zmienic rzutowaniem. Tyle, ze uzyjemy
+const_cast.
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>... operacja zmiany wartosci pola statycznego moze byc wykonana zawsze
+niezaleznie od tego czy obiekt jest staly czy nie. Jedynym warunkiem jest
+dostepnosc tego pola.
+  </Tresc>
+        <Odpowiedz>true</Odpowiedz>
+        <Notatka>zmienne statyczne mozna zmieniac. Patrz 2 punkty wyzej.
+  </Notatka>
+      </Pytanie>
+    </Pytania>
+  </Problem>
+  <Problem>
+    <Kod />
+    <Opis>Mamy zdefiniowana klase "Telefon":
+class Telefon {
+public:
+int _Numer;
+};
+Czy prawda jest, ze ...
+    </Opis>
+    <Pytania>
+      <Pytanie>
+        <Tresc>... w klasie tej istnieje konstruktor bezparametryczny.
+  </Tresc>
+        <Odpowiedz>true</Odpowiedz>
+        <Notatka>jest domyslny, zawsze
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>... mozna utworzyc obiekt tej klasy wywolujac konstruktor bezparametryczny.
+  </Tresc>
+        <Odpowiedz>true</Odpowiedz>
+        <Notatka>sprawdzone
+  </Notatka>
+      </Pytanie>
+    </Pytania>
+  </Problem>
+  <Problem>
+    <Kod />
+    <Opis>Mamy zdefiniowana klase "FiguraGeom":
+class FiguraGeom {
+public:
+double _Obwod;
+FiguraGeom(): _Obwod() {}
+};
+Czy prawda jest, ze ...
+    </Opis>
+    <Pytania>
+      <Pytanie>
+        <Tresc>... w tej klasie zdefiniowanie konstruktora bezparametrycznego powoduje
+uniewaznienie automatycznie generowanego konstruktora kopiujacego.
+  </Tresc>
+        <Odpowiedz>false</Odpowiedz>
+        <Notatka>przybylem - zobaczylem - sprawdzilem: wciaz istnieje kopiujacy;
+problem moze byc w innej sytuacji. Jak zdefiniujemy konstruktor
+parametryczny “FiguraGeom( int parametr) { bla bla; }” to znika nam
+bezparametryczny (nawet domyslny)
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>... w tej klasie bezposrednio po utworzeniu obiektu jego pole "_Obwod" bedzie
+ono mialo zawsze wartosc 0, o ile zostanie uzyty konstruktor bezparametryczny.
+W innym przypadku juz tak byc nie musi.
+  </Tresc>
+        <Odpowiedz>true</Odpowiedz>
+        <Notatka>bezparametryczny przypisze tam 0, ale kopiujacy nie koniecznie.
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>... w tej klasie bezposrednio po utworzeniu obiektu jego pole "_Obwod" bedzie
+mialo wartosc 0 po kazdorazowym utworzeniu obiektu z wykorzystaniem
+konstruktora bezparametrycznego.
+  </Tresc>
+        <Odpowiedz>true</Odpowiedz>
+        <Notatka>bo inicjalizujemy je zerem i koniec. (kropka)
+  </Notatka>
+      </Pytanie>
+    </Pytania>
+  </Problem>
+  <Problem>
+    <Kod />
+    <Opis>Niech bedzie dana definicja klasy:
+struct LiczbaZespolona {
+float _Re, _Im;
+public:
+float Re() const {
+return _Re;
+}
+float&amp; Re(){
+return _Re;
+}
+float Im() const {
+return _Im;
+}
+float&amp; Im(){
+return _Im;
+}
+};
+Czy prawda jest, ze ...
+    </Opis>
+    <Pytania>
+      <Pytanie>
+        <Tresc>... metody "Re()" oraz "Im()" nie sa przeciazone, gdyz zwracaja rozny typ
+wartosci.
+  </Tresc>
+        <Odpowiedz>false</Odpowiedz>
+        <Notatka>one sa przeciazone - te same nazwy + te same argumenty [a raczej ich
+brak]
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>... niezaleznie od sposobu utworznia obiektu tej klasy nie mozna zmienic jego
+zawartosci.
+  </Tresc>
+        <Odpowiedz>false</Odpowiedz>
+        <Notatka>mozna zmienic bez problemu. bo zwracana jest referencja (nawet jesli
+odnosi sie do private!)
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>... dla kodu przedstawionego ponizej zostanie wywolana metoda "float
+LiczbaZespolona::Re() const".
+float Odczyt(LiczbaZespolona&amp; Z){
+cout &amp;lt;&amp;lt; Z.Re();
+}
+  </Tresc>
+        <Odpowiedz>false</Odpowiedz>
+        <Notatka>tutaj zwrócona zostanie referencja. bo cout lubi referencje
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>... w funkcji ponizej tworzy sie obiekt staly, ktory jest inicjalizowany wartoscia
+parametru wywolania tej funkcji.
+float Odczyt(const LiczbaZespolona Z){
+cout &lt;&lt; Z.Re();
+}
+  </Tresc>
+        <Odpowiedz>true</Odpowiedz>
+        <Notatka>tworzy sie jego kopia, nie jest przekazywany adres czy sam parametr (po to
+wlasnie sa wskazniki i referencje)
+  </Notatka>
+      </Pytanie>
+    </Pytania>
+  </Problem>
+  <Problem>
+    <Kod />
+    <Opis>Niech bedzie dana definicja klasy oraz zapowiedz definicji funkcji:
+class KlasaLiczby {
+float _Liczba;
+public:
+float PobierzLiczbe() const {
+return _Liczba;
+} float&amp; PobierzLiczbe(){
+return _Liczba;
+}
+};
+void Dzialaj(const KlasaLiczby Lx);
+Czy prawda jest, ze ...
+
+    </Opis>
+    <Pytania>
+      <Pytanie>
+        <Tresc>... dla wywolania:
+int main(){
+KlasaLiczby Li;
+Dzialaj(Li);
+}
+Zawartosc obiektu "Li" na pewno nie ulegnie zmianie, gdyz w zapowiedzi definicji
+funkcji znajduje sie modyfikator "const". Bez niego nie ma juz takiej gwarancji
+  </Tresc>
+        <Odpowiedz>false</Odpowiedz>
+        <Notatka>zawartosc obiektu nie ulegnie zmianie ale z innego powodu. Patrz nizej
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>... dla wywolania:
+int main(){
+KlasaLiczby Li;
+Dzialaj(Li);
+}
+Zawartosc obiektu "Li" na pewno nie ulegnie zmianie, gdyz obiekt przkazywany
+jest do funkcji poprzez wartosc.
+  </Tresc>
+        <Odpowiedz>true</Odpowiedz>
+        <Notatka>nic dodac, nic ujac ;)
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>... dla wywolania:
+int main(){
+KlasaLiczby Li;
+Dzialaj(Li);
+}
+W trakcie wywolania funkcji obiekt "Li" jest kopiowany.
+  </Tresc>
+        <Odpowiedz>true</Odpowiedz>
+        <Notatka>zawsze przy przekazywaniu przez wartosc
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>... dla wywolania:
+int main(){
+KlasaLiczby Li;
+Dzialaj(Li);
+}
+Wartosc obiektu "Li" nie ulega zmianie. Ponadto tworzona jest jego kopia, ktora
+moze byc modyfikowana wewnatrz funkcji "Dzialaj" bez jakichkololwiek rzutowan.
+  </Tresc>
+        <Odpowiedz>false</Odpowiedz>
+        <Notatka>obiekt Li jest zdeklarowany jako const , jego kopia z funkcji tez
+  </Notatka>
+      </Pytanie>
+    </Pytania>
+  </Problem>
+  <Problem>
+    <Kod />
+    <Opis>Niech bedzie dana definicja klasy oraz zapowiedz definicji funkcji:
+class KlasaLiczby {
+float _Liczba;
+public:
+float PobierzLiczbe() const {
+return _Liczba;
+}
+float&amp; PobierzLiczbe(){
+return _Liczba;
+}
+};
+Czy prawda jest, ze ...
+
+    </Opis>
+    <Pytania>
+      <Pytanie>
+        <Tresc>... rownowazna definicja tej klasy jest:
+struct KlasaLiczby {
+float _Liczba;
+private:
+float PobierzLiczbe() const {
+return _Liczba;
+} float&amp; PobierzLiczbe(){
+return _Liczba;
+}
+};
+  </Tresc>
+        <Odpowiedz>false</Odpowiedz>
+        <Notatka>sa zamienione sekcje, tzn Liczba jest w public, a metody w private
+(odwrotnie wzgledem pierwowzoru)
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>... rownowazna definicja tej klasy jest:
+struct KlasaLiczby {
+float PobierzLiczbe() const {
+return _Liczba;
+}
+private:
+float _Liczba;
+public:
+float&amp; PobierzLiczbe(){
+return _Liczba;
+}
+};
+  </Tresc>
+        <Odpowiedz>true</Odpowiedz>
+        <Notatka>struct domyslnie jest publiczny, wiec sie zgadza
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>... rownowazna definicja tej klasy jest:
+class KlasaLiczby {
+public:
+float PobierzLiczbe() const {
+return _Liczba;
+} float&amp; PobierzLiczbe(){
+return _Liczba;
+}
+private:
+float _Liczba;
+};
+  </Tresc>
+        <Odpowiedz>true</Odpowiedz>
+        <Notatka>wewnatrz klasy kolejnosc definicji nie ma znaczenia, moga byc dowolnie
+przemieszane
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>... rownowazna definicja tej klasy jest:
+struct KlasaLiczby {
+float PobierzLiczbe() const {
+return _Liczba;
+} float&amp; PobierzLiczbe(){
+return _Liczba;
+} float _
+Liczba;
+};
+  </Tresc>
+        <Odpowiedz>false</Odpowiedz>
+        <Notatka>_Liczba jest publiczna, a powinna byc prywatna (jak w pierwowzorze)
+  </Notatka>
+      </Pytanie>
+    </Pytania>
+  </Problem>
+  <Problem>
+    <Kod />
+    <Opis>Niech bedzie dana definicja klasy
+class Wektor {
+protected:
+float _x, _y;
+public:
+Wektor(float x, float y) { _x = x; _y = y; }
+Wektor Dodaj(const Wektor&amp; W) const;
+};
+Czy prawda jest, ze ...
+    </Opis>
+    <Pytania>
+      <Pytanie>
+        <Tresc>... jedna z roznic miedzy sekcja "private", a "protected" polega na tym,
+ze w przypadku wystapienia w definicji klasy Wektor sekcji "private"
+zamiast "protected" ponizsza definicja metody nie zawsze bylaby poprawna:
+Wektor Wektor::Dodaj(const Wektor&amp; W) const{
+return Wektor(_x + W._x, _y + W._y);
+}
+  </Tresc>
+        <Odpowiedz>false</Odpowiedz>
+        <Notatka>roznica jest w tym ,ze protected jest dziedziczone, a private nie
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>... rownowazna definicja klasy "Wektor" jest:
+class Wektor {
+float _x, _y;
+public:
+Wektor(float x, float y) {
+_x = x; _y = y;
+} Wektor Dodaj(const Wektor&amp; W) const;
+};
+  </Tresc>
+        <Odpowiedz>false</Odpowiedz>
+        <Notatka>w tym momencie floaty sa prywatne, a nie chronione (jak powinny). Co
+oznacza ze jesli bedziemy dziedziczyc z wektora pola _x i _y nie zdziedzicza sie ;)
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>... w definicji metody "Dodaj", przedstawionej ponizej, mozna odwolywac sie do
+pol chronionych innych obiektow tej samej klasy. Jest to prawdziwe dla dowolnej
+metody, ktora zdefiniowana bylaby dla klasy "Wektor".
+Wektor Wektor::Dodaj(const Wektor&amp; W) const{
+return Wektor(_x + W._x, _y + W._y);
+}
+  </Tresc>
+        <Odpowiedz>true</Odpowiedz>
+        <Notatka>jest to metoda klasy, ma nieograniczony dostep do wszystkich pól,
+sprawdzone
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>... sekcja "protected" nie ma zadnego znaczenia, gdy w metodach odwolujemy
+sie do pol, ktore wraz z metodami sa elementami definicji tej samej klasy.
+Przykladem moze byc odwolanie sie do pol prywatnych "_x" i "_y" w
+konstruktorze klasy "Wektor".
+  </Tresc>
+        <Odpowiedz>true</Odpowiedz>
+        <Notatka>protected rózni sie od private tylko przy dziedziczeniu, wiec patrz jak wyzej
+  </Notatka>
+      </Pytanie>
+    </Pytania>
+  </Problem>
+  <Problem>
+    <Kod />
+    <Opis>Niech bedzie dana definicja klasy oraz definicja pola statycznego:
+class KlasaLiczby {
+protected:
+static int _IloscLiczb;
+public:
+int _Liczba;
+KlasaLiczby(): _Liczba() {
+++_IloscLiczb;
+} ~
+KlasaLiczby() {
+--_IloscLiczb;
+}
+};
+int KlasaLiczby::_IloscLiczb;
+Czy prawda jest, ze ...
+    </Opis>
+    <Pytania>
+      <Pytanie>
+        <Tresc>... bezposrednio po utworzeniu obiektu klasy "KlasaLiczby" pola "_IloscLiczb"
+i "_Liczba" beda mialy zawsze rozne wartosci.
+  </Tresc>
+        <Odpowiedz>false</Odpowiedz>
+        <Notatka>bezposrednio po uruchomieniu programu zmienna statyczna _IloscLiczb =
+0; potem zaczyna sie int main(), tam sobie tworzymy obiekt KlasaLiczby; i jego
+konstruktor inicjalizuje nam _Liczba wartoscia 0.
+Teraz przez nanosekundy sa one sobie równe, bo potem zaraz zaczyna sie
+wykonywac reszta konstruktora, która inkrementuje _IloscLiczb. Wstawic:
+if(_IloscLiczb == _Liczba) cout &amp;lt;&amp;lt; "RÓWNE!!!!" &amp;lt;&amp;lt; endl;
+przed inkrementacja w konstruktorze i jest dowód.
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>... dodanie nowego pola statycznego moze prowadzic do zwiekszenia rozmiaru
+obiektu.
+  </Tresc>
+        <Odpowiedz>false</Odpowiedz>
+        <Notatka>dodanie trzeciego pola statycznego nie zwiekszy rozmiaru samej klasy - bo
+pola statyczne sa tak jakby globalne i nie znajduja sie w klasie. - sprawdzone
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>... w konstruktorze nie jest inicjalizowane pole "_Liczba". Moze wiec sie zdarzyc,
+ze jego wartosc bezposrednio po utworzeniu obiektu bedzie dowolna. Aczkolwiek
+zazwyczaj bedzie to wartosc 0.
+  </Tresc>
+        <Odpowiedz>false</Odpowiedz>
+        <Notatka>pole liczba jest inicjalizowane poprzez : _Liczba() wartoscia 0
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>... w tym przypadku pole statyczne "_IloscLiczb" jest niejawnie inicjalizowane ta
+sama wartoscia jak pole "_Liczba".
+  </Tresc>
+        <Odpowiedz>true</Odpowiedz>
+        <Notatka>_Liczba = 0 przez konstruktor, a _IloscLiczb przez
+int KlasaLiczby::_IloscLiczb; //tutaj jest przypisywane 0
+  </Notatka>
+      </Pytanie>
+    </Pytania>
+  </Problem>
+  <Problem>
+    <Kod />
+    <Opis>Niech bedzie dana definicja klas i zapowiedz definicji funkcji:
+class FiguraGeometryczna {
+protected:
+float _WsplrzednaSrodka_x, _WsplrzednaSrodka_y;
+};
+class Kwadrat: public FiguraGeometryczna {
+public:
+float _RozmiarBoku;
+};
+void Dzialaj( FiguraGeometryczna Fig );
+Czy prawda jest, ze ...
+
+    </Opis>
+    <Pytania>
+      <Pytanie>
+        <Tresc>... wywolanie funkcji przedstawione ponizej
+int main(){
+Kwadrat Kw;
+Dzialaj(Kw);
+}
+moze byc nieprawidlowe, choc nie zawsze to zasygnalizuje kompilator. Powodem
+sa rozne typy obiektu i parametru formalnego.
+  </Tresc>
+        <Odpowiedz>false</Odpowiedz>
+        <Notatka>zachodzi niejawne rzutowanie w góre
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>... wywolanie funkcji przedstawione ponizej:
+int main(){
+Kwadrat Kw;
+Dzialaj(Kw);
+}
+niezaleznie od definicji funkcji "Dzialaj" nigdy nie spowoduje ona zadnych zmian
+w obiekcie "Kw".
+  </Tresc>
+        <Odpowiedz>true</Odpowiedz>
+        <Notatka>o ile nie podamy figury jako referencji czy wskaznika na nia
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>... wywolanie funkcji przedstawione ponizej
+int main(){
+Kwadrat Kw;
+Dzialaj(Kw);
+}
+do funkcji "Dzialaj" przekazywana jest kopia podobiektu klasy
+FiguraGeomtryczna, ktory zawarty jest w obiekcie "Kw".
+
+
+  </Tresc>
+        <Odpowiedz>true</Odpowiedz>
+        <Notatka>TAK, zachodzi niejawne rzutowanie w dól.</Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>... wywolanie funkcji przedstawione ponizej
+int main(){
+Kwadrat Kw;
+Dzialaj(Kw);
+}
+w zaleznosci od definicji funkcji "Dzialaj" mozna odwolac sie do obiektu "Kw"
+wewnatrz tej funkcji, choc nie bedzie go mozna zmienic.
+  </Tresc>
+        <Odpowiedz>true</Odpowiedz>
+        <Notatka>Na pewno nie bedzie mozna go zmienic, wynika to z faktu ze przekazujemy
+kopie obiektu
+  </Notatka>
+      </Pytanie>
+    </Pytania>
+  </Problem>
+  <Problem>
+    <Kod />
+    <Opis>Niech bedzie dana definicja klasy oraz definicja przeciazenia
+operatora podstawienia:
+class Liczba {
+private:
+float *_wLiczba;
+public:
+Liczba() {
+_wLiczba = new float;
+} ~
+Liczba() {
+delete _wLiczba;
+} Liczba&amp; operator =
+(
+const Liczba&amp; L);
+};
+Liczba&amp; Liczba::operator = (const Liczba&amp; L){
+*_wLiczba= *L._wLiczba;
+return *this;
+}
+Czy prawda jest, ze ...
+    </Opis>
+    <Pytania>
+      <Pytanie>
+        <Tresc>... dla kodu przedstawionego ponizej
+int main(){
+Liczba L1;
+Liczba L2 = L1;
+}
+operacja przypisania wartosci L1 do L2 zostanie wykonana poprawnie dzieki
+przeciazeniu operatora "=". Niemniej uzycie niektorych kompilatorow, moze
+powodowac bledne wykonanie programu.
+  </Tresc>
+        <Odpowiedz>false</Odpowiedz>
+        <Notatka>Wywolywany jest konstruktor kopiujacy domyslny. Zatem do *_wLiczba
+w L2 nie jest przydzielana nowa pamiec. L2 jest kopiowane od L1, zatem oba
+wspóldziela jeden fragment pamieci - ten pod adresem _wLiczba w L1. Oba
+natomiast posiadaja destruktor. Pierwszy z usuwanych obiektów zwalnia pamiec
+pod adresem _wLiczba, a drugi próbuje zrobic to samo, ale pamiec jest juz
+uwolniona.
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>... dla kodu przedstawionego ponizej
+int main(){
+Liczba *wL = new Liczba;
+Liczba L1 = *wL;
+}
+operacja tworzenia obiektu L1 nie wykorzystuje konstruktora
+bezparametrycznego, ani tez przeciazenia operatora "=".
+  </Tresc>
+        <Odpowiedz>true</Odpowiedz>
+        <Notatka>Przypisujemy zawartosc wskaznika, sprawdzone organoleptycznie;j/w
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>... dla kodu przedstawionego ponizej
+int main(){
+Liczba *wL = new Liczba;
+Liczba L1 = *wL;
+}
+przedstawiona konstrukcja jest prawidlowa i destrukcja obu obiektow
+przebiegnie bez zadnych bledow, tzn. destruktory obu obiektow wykonaja sie
+prawidlowo. Byloby jednak lepiej, aby jawnie usuwac obiekt *wL poprzez uzycie
+operatora "delete", tzn.
+delete wL;
+  </Tresc>
+        <Odpowiedz>false</Odpowiedz>
+        <Notatka>program nie bedzie mial bledow kompilacji, natomiast destruktor obiektu
+*wL nie wykona sie (z tego wzgledu ze jest to wskaznik) - nazywa sie to wyciek
+pamieci. No i ogolnie byloby lepiej wywolac deleta wL.
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>... konstrukcja klasy nie zapewnia poprawnego dzialania programu w przypadku
+poslugiwania sie funkcjami z parametrami klasy "Liczba" przekazywanymi przez
+wartosc, np.
+void Dzialaj( Liczba L ){
+...
+}
+  </Tresc>
+        <Odpowiedz>true</Odpowiedz>
+        <Notatka>brak konstruktora kopiujacego powoduje ze skopiowany obiekt bedzie
+wskazywal na te same miejsca w pamieci co jego oryginal.
+  </Notatka>
+      </Pytanie>
+    </Pytania>
+  </Problem>
+  <Problem>
+    <Kod />
+    <Opis>Niech bedzie dany nastepujacy fragment kodu
+class Klasa {
+int _Kod;
+public:
+const Klasa&amp; Metoda1() const {
+return *this;
+} Klasa&amp; Metoda2(){
+return *this;
+} const Klasa&amp; Metoda3(){
+return *this;
+}
+};
+Czy prawda jest, ze ...
+    </Opis>
+    <Pytania>
+      <Pytanie>
+        <Tresc>... ze ponizszy ciag wywolan
+int main(){
+Klasa Ob;
+Ob.Metoda1().Metoda2().Metoda3();
+}
+jest niepoprawny, gdyz metode mozna wywolywac tylko dla obiektu, a nie wyniku
+zwracanego przez inna metode.
+  </Tresc>
+        <Odpowiedz>false</Odpowiedz>
+        <Notatka>Zapis jest niepoprawny w tym kontekscie - ze wzgledu na consty
+wystepujace w metodach (a nie z powodu podanego w tresci pytania - dlatego
+NIE)
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>... ze ponizszy ciag wywolan
+int main(){
+Klasa Ob1;
+const Klasa Ob2;
+Ob2 = Ob1.Metoda2();
+}
+doprowadzi do sytuacji, ze w zmiennej "Ob2" znajdzie sie obiekt, ktory bedzie
+modyfikowalny.
+  </Tresc>
+        <Odpowiedz>false</Odpowiedz>
+        <Notatka>to sie nie skompiluje. const Klasa Ob2 jest niezaincjalizowane
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>... ze dla ponizszego ciagu wywolan
+int main(){
+Klasa Ob;
+const Klasa &amp;Ref_Ob = Ob; // referencja, tym razem tutaj nie ma bledu kompilacji, bo
+tylko przypisujemy do czego Ref_Ob bedzie sie odnosic, a nie inicjalizujemy w tradycyjny sposob
+Ref_Ob.Metoda1();
+Ob.Metoda2();
+}
+zarowno "Metoda1" jak tez "Metoda2" zwraca referencje do tego samego obiektu.
+  </Tresc>
+        <Odpowiedz>true</Odpowiedz>
+        <Notatka>to sa referencje, sprawdzane kompilatorem
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>... ze dla ponizszego ciagu wywolan
+int main(){
+Klasa Ob1;
+Klasa Ob2;
+Ob1.Metoda2() = Ob2.Metoda1();
+}
+po wykonaniu tej operacji zawartosc obu obiektow bedzie jednakowa.
+  </Tresc>
+        <Odpowiedz>true</Odpowiedz>
+        <Notatka>bo Metoda2() zwraca referencje, a Metoda1() zwraca const referencje
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>... ze dla ponizszego ciagu wywolan
+int main(){
+Klasa Ob1;
+Klasa Ob2;
+Ob2.Metoda1() = Ob1.Metoda2();
+}
+po wykonaniu tej operacji zawartosc obu obiektow bedzie jednakowa.
+  </Tresc>
+        <Odpowiedz>false</Odpowiedz>
+        <Notatka>Metoda1() zwraca const referencje nie mozna wiec tego obiektu
+modyfikowac!
+
+  </Notatka>
+      </Pytanie>
+    </Pytania>
+  </Problem>
+  <Problem>
+    <Kod />
+    <Opis>Niech bedzie dany nastepujacy fragment kodu
+int main(){
+try {
+throw std::cout;
+} catch (
+std::ostream&amp; OStrm) {
+cout &lt;&lt; "Obsluga: 1" &lt;&lt; endl;
+} catch (
+std::istream&amp; OStrm) {
+cout &lt;&lt; "Obsluga: 2" &lt;&lt; endl;
+}
+}
+Czy prawda jest, ze ...
+    </Opis>
+    <Pytania>
+      <Pytanie>
+        <Tresc>... zapis jest niepoprawny, gdyz nie mozna zglaszac jako wyjatkow obiektow z
+biblioteki standardowej.
+  </Tresc>
+        <Odpowiedz>false</Odpowiedz>
+        <Notatka>Zapis jest niepoprawny ale mozna zglaszac wyjatki z z stdlib.
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>... zapis jest niepoprawny, gdyz strumieni nie mozna przekazywac do metod
+poprzez wartosc.
+  </Tresc>
+        <Odpowiedz>false</Odpowiedz>
+        <Notatka>Strumien nie przekazuje sie jako wartosc, wtedy nastapila by kopia
+strumienai wejscia. a w linuchu strumienie to pliki. a dwa pliki te same nie moga
+byc otwarte
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>... zapis jest niepoprawny, gdyz jako wyjatku nie mozna zglaszac w jakiejkolwiek
+formie strumienia standardowego, tzn. bezposrednio jako obiekt lub posrednio
+poprzez zmienne referencjna lub wskaznik.
+  </Tresc>
+        <Odpowiedz>true</Odpowiedz>
+        <Notatka />
+      </Pytanie>
+      <Pytanie>
+        <Tresc>... mozliwa jest modyfikacja zgloszenia obiektu std::cout bez wprowadzania
+dodatkowych definicji klas, tak aby ktoras z istniejacych sekcji "catch"
+przechwycila go.
+  </Tresc>
+        <Odpowiedz>false</Odpowiedz>
+        <Notatka />
+      </Pytanie>
+    </Pytania>
+  </Problem>
+  <Problem>
+    <Kod />
+    <Opis>Niech bedzie dany nastepujacy fragment kodu
+class FiguraGeometryczna {
+public:
+double _Pole;
+};
+class Kwadrat: public FiguraGeometryczna {
+public:
+double _DlugoscBoku;
+};
+Czy prawda jest, ze ...
+
+    </Opis>
+    <Pytania>
+      <Pytanie>
+        <Tresc>... w przedstawionym ponizej zapisie wystepuje niejawne rzutowanie "w gore".
+int main(){
+Kwadrat Kw;
+FiguraGeometryczna *wFig = &amp;Kw;
+}
+  </Tresc>
+        <Odpowiedz>true</Odpowiedz>
+        <Notatka>klasa nizsza jest rzutowana na klase wyzsza
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>... w przedstawionym ponizej zapisie wystepuje niejawne rzutowanie "w dol".
+int main(){
+Kwadrat Kw;
+FiguraGeometryczna *wFig = &amp;Kw;
+}
+  </Tresc>
+        <Odpowiedz>false</Odpowiedz>
+        <Notatka>patrz wyzej
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>... w przedstawionym ponizej zapisie wystepuje niejawne rzutowanie "w dol".
+int main(){
+FiguraGeometryczna Fig;
+Kwadrat *wKw = &amp;Fig;
+}
+  </Tresc>
+        <Odpowiedz>false</Odpowiedz>
+        <Notatka>to sie nie skompiluje. FiguraGeometryczna jest bytem mniejszym od
+Kwadrat, wiec nie da rady
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>... w przedstawionym ponizej zapisie wystepuje niejawne rzutowanie "w gore".
+int main(){
+FiguraGeometryczna Fig;
+Kwadrat *wKw = &amp;Fig;
+}
+  </Tresc>
+        <Odpowiedz>false</Odpowiedz>
+        <Notatka>to jest jakies niemozliwe rzutowanie w dól. Tak jakbysmy bude na psa
+chcieli rzutowac.
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>... w przedstawionym ponizej zapisie poprzez zmienna "Fig" mamy dostep do
+podobiektu zawartego w obiekcie "Kw".
+int main(){
+Kwadrat Kw;
+FiguraGeometryczna &amp;Fig = Kw;
+}
+  </Tresc>
+        <Odpowiedz>true</Odpowiedz>
+        <Notatka>o ile dokonamy rzutowania na kwadrat. Jesli tego nie zrobimy dostepne
+beda tylko pola i metody z FiguraGeometryczna
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>... w przedstawionym ponizej zapisie poprzez zmienna "Fig" mamy dostep do
+podobiektu zawartego w obiekcie "Kw". Pozwala to modyfikowac zawartosc
+obiektu "Kw" poprzez zmiany w obiekcie "Fig".
+int main(){
+Kwadrat Kw;
+FiguraGeometryczna Fig = Kw;
+}
+  </Tresc>
+        <Odpowiedz>false</Odpowiedz>
+        <Notatka>cala róznica pomiedzy tym, a powyzszym, to to ze tworzy sie kopia
+  </Notatka>
+      </Pytanie>
+    </Pytania>
+  </Problem>
+  <Problem>
+    <Kod />
+    <Opis>Niech bedzie dany nastepujacy fragment kodu
+class FiguraGeometryczna {
+public:
+double _Pole;
+double ObliczPole() { return _Pole; }
+};
+class Kwadrat: public FiguraGeometryczna {
+public:
+double _DlugoscBoku;
+double ObliczPole(double Skala){
+return pow(Skala*_DlugoscBoku,2);
+}
+};
+Czy prawda jest, ze ...
+    </Opis>
+    <Pytania>
+      <Pytanie>
+        <Tresc>... ponizszy zapis jest nieprawidlowy i nie ma sposobu, aby nie modyfikujac
+definicji klas i dysponujac obiektem "Kw" odwolac sie do metody "ObliczPole()" z
+klasy "FiguraGeometryczna".
+int main(){
+Kwadrat Kw;
+Kw.ObliczPole();
+}
+  </Tresc>
+        <Odpowiedz>false</Odpowiedz>
+        <Notatka>zapis jest nieprawidlowy. Kwadrat nie ma metody ObliczPole(), ale
+jest sposób na odwolanie sie do FiguraGeometryczna. Wystarczy uzyc
+Kw.FiguraGeometryczna::ObliczPole()
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>... ponizszy zapis jest nieprawidlowy. Dysponujac referencja "Fig" do obiektu
+klasy "FiguraGeometryczna" i nie dokonujac zadnych rzutowan mozna odwolac sie
+tylko do metody "ObliczPole()", a nie "ObliczPole(double)".
+int main(){
+Kwadrat Kw;
+FiguraGeometryczna &amp;Fig = Kw;
+Fig.ObliczPole(1.0);
+}
+  </Tresc>
+        <Odpowiedz>true</Odpowiedz>
+        <Notatka>zapis jest nieprawidlowy, nie kompiluje sie; Dostep jest do
+ObliczPole(double) z Kwadrat nie jest dostepny bez rzutowania.
+  </Notatka>
+      </Pytanie>
+    </Pytania>
+  </Problem>
+  <Problem>
+    <Kod />
+    <Opis>Niech bedzie dany nastepujacy fragment kodu
+class FiguraGeometryczna {
+double _Pole;
+public:
+double ObliczPole() {
+return _Pole;
+}
+};
+class Kwadrat: private FiguraGeometryczna {
+double _DlugoscBoku;
+public:
+double ObliczPole(double Skala){
+return pow(Skala*_DlugoscBoku,2);
+}
+};
+Czy prawda jest, ze ...
+    </Opis>
+    <Pytania>
+      <Pytanie>
+        <Tresc>... ponizszy zapis jest nieprawidlowy i nie ma sposobu, aby
+dysponujac obiektem "Kw" odwolac sie do metody "ObliczPole()" z
+klasy "FiguraGeometryczna".
+int main(){
+Kwadrat Kw;
+Kw.ObliczPole();
+}
+  </Tresc>
+        <Odpowiedz>true</Odpowiedz>
+        <Notatka>powyzsze wywolanie spowoduje blad. Kw.FiguraGeometryczna::ObliczPole()
+tez, poniewaz odwolujemy sie wtedy do pola prywatnego [private przy
+dziedziczeniu]
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>... ponizszy zapis jest nieprawidlowy, chociaz rzutowanie niejawne na referencje
+do podobiektu klasy "FiguraGeometryczna" jest poprawne.
+int main() {
+Kwadrat Kw;
+FiguraGeometryczna &amp;Fig = Kw;
+Fig.ObliczPole();
+}
+  </Tresc>
+        <Odpowiedz>false</Odpowiedz>
+        <Notatka>Jest niepoprawne bo ObliczPole jest prywatna wlasnoscia klasy Kwadrat [po
+rzutowaniu]. Wywali:
+main.cpp:24:27: error: ‘FiguraGeometryczna’ is an inaccessible base of ‘Kwadrat’
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>... ponizszy zapis jest nieprawidlowy. Jednym z powodow jest to, ze ze wzgledu
+na dziedziczenie, gdy dysponujemy referencja "Fig" mozemy odwolac sie tylko do
+metody "ObliczPole(double)".
+int main() {
+Kwadrat Kw;
+FiguraGeometryczna &amp;Fig = Kw;
+Fig.ObliczPole();
+}
+  </Tresc>
+        <Odpowiedz>false</Odpowiedz>
+        <Notatka>FiguraFeometryczna jest prywatna skladowa Kwadradu, wobec tego nie
+mozna na nia rzutowac.
+main.cpp:24:27: error: ‘FiguraGeometryczna’ is an inaccessible base of ‘Kwadrat’
+  </Notatka>
+      </Pytanie>
+    </Pytania>
+  </Problem>
+  <Problem>
+    <Kod />
+    <Opis>Niech bedzie dany nastepujacy fragment kodu
+class FiguraGeometryczna {
+private:
+double _Pole;
+double ObliczPole() {
+return _Pole;
+}
+public:
+};
+class Kwadrat: public FiguraGeometryczna {
+private:
+double _DlugoscBoku;
+public:
+double ObliczPole(double Skala){
+return pow(Skala*_DlugoscBoku,2);
+}
+};
+Czy prawda jest, ze ...
+    </Opis>
+    <Pytania>
+      <Pytanie>
+        <Tresc>... ponizszy zapis jest nieprawidlowy i nie ma sposobu, aby dysponujac
+obiektem klasy "Kwadrat" odwolac sie do metody "ObliczPole()" z klasy
+FiguraGeometryczna".
+int main(){
+Kwadrat Kw;
+Kw.ObliczPole();
+}
+  </Tresc>
+        <Odpowiedz>true</Odpowiedz>
+        <Notatka>ObliczPole jest nie dziedziczona, bo jest metoda prywatna
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>... ponizszy zapis jest nieprawidlowy. Dysponujac referencja "Fig" do obiektu
+klasy "FiguraGeometryczna" i dokonujac rzutowan mozna odwolac sie tylko do
+metody "ObliczPole(double)", a nie "ObliczPole()".
+int main(){
+Kwadrat Kw;
+FiguraGeometryczna &amp;Fig = Kw;
+Fig.ObliczPole();
+}
+  </Tresc>
+        <Odpowiedz>true</Odpowiedz>
+        <Notatka>do obliczPole(double) mozna sie odwolac. jest ona public. ]Oczywiscie jezeli
+wykonamy odpowiednie rzutowanie
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>... ponizszy zapis jest nieprawidlowy. Dysponujac referencja do obiektu
+klasy "FiguraGeometryczna" i nie dokonujac zadnych rzutowan mozna odwolac sie
+tylko do metody "ObliczPole()", a nie "ObliczPole(double)".
+int main(){
+Kwadrat Kw;
+FiguraGeometryczna &amp;Fig = Kw;
+Fig.ObliczPole();
+}
+  </Tresc>
+        <Odpowiedz>false</Odpowiedz>
+        <Notatka>do obliczPole(double) mozna sie odwolac. jest ona public. Oczywiscie jezeli
+wykonamy odpowiednie rzutowanie
+  </Notatka>
+      </Pytanie>
+    </Pytania>
+  </Problem>
+  <Problem>
+    <Kod />
+    <Opis>Niech beda dane prototypy dwoch funkcji:
+void Wylicz( float Param1, double Param2 );
+void Wylicz( double Param1, float Param2 );
+Zakladajac, ze w programie znajduja sie poprawne ich definicje i ze nie
+ma innego przeciazenia funcji "Wylicz", czy prawda jest, ze ...
+    </Opis>
+    <Pytania>
+      <Pytanie>
+        <Tresc>... w funkcji main przedstawionej ponizej:
+int main(){
+Wylicz(1.2, 'c');
+}
+na ogol zostanie wywolana druga z przedstawionych funkcji, tzn.
+Wylicz( double Param1, float Param2 );
+Zalezy to jednak od kompilatora i od domyslnej interpretacji uzytej w liscie
+parametrow stalej liczbowej.
+  </Tresc>
+        <Odpowiedz>true</Odpowiedz>
+        <Notatka>sprawdzone - u mnie uzywal konfiguracji argumentów double/float
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>... w funkcji main przedstawionej ponizej:
+enum PoryRoku { Wiosna, Lato, Jesien, Zima };
+int main(){
+Wylicz( Wiosna , 1.2);
+}
+zostanie wywolana pierwsza z przedstawionych funkcji, tzn. Wylicz( float Param1,
+double Param2 );
+O wywolaniu tej funkcji decyduje uzyta stala liczbowa.
+  </Tresc>
+        <Odpowiedz>true</Odpowiedz>
+        <Notatka>enum rzutowane jest na floata, wiec 1.2 na double
+  </Notatka>
+      </Pytanie>
+    </Pytania>
+  </Problem>
+  <Problem>
+    <Kod />
+    <Opis>Niech bedzie dany nastepujacy fragment kodu
+class FiguraGeometryczna {
+double _PolePowierzchni;
+public:
+double&amp; UzyjPole() { return _PolePowierzchni; }
+};
+class Kwadrat: public FiguraGeometryczna {
+double _DlugoscBoku;
+public:
+Kwadrat&amp; ZmienDlugosc(double Dl) {
+_DlugoscBoku = Dl;
+return *this;
+} FiguraGeometryczna&amp; UzyjFigure() {
+return *this;
+}
+};
+Czy prawda jest, ze ...
+    </Opis>
+    <Pytania>
+      <Pytanie>
+        <Tresc>... przedstawiony ponizej kod programu jest poprawny i nigdy nie spowoduje
+bledu wykonania programu (np. niedozwolony dostep do pamieci).
+int main(){
+Kwadrat Kw;
+FiguraGeometryczna Fig;
+Kw.ZmienDlugosc(10).UzyjFigure().UzyjPole() = 5;
+}
+  </Tresc>
+        <Odpowiedz>true</Odpowiedz>
+        <Notatka>program wykona sie poprawnie.
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>... przedstawiony ponizej kod programu jest poprawny i nigdy nie spowoduje
+bledu wykonania programu (np. niedozwolony dostep do pamieci).
+int main(){
+Kwadrat Kw;
+FiguraGeometryczna Fig;
+Kw.ZmienDlugosc(10).UzyjPole().UzyjFigure() = 5;
+}
+  </Tresc>
+        <Odpowiedz>false</Odpowiedz>
+        <Notatka>UzyjPole zwraca double a nie referencje do Kwadratu
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>... przedstawiony ponizej kod programu moze (ale nie musi) spowodowac zmiane
+zawartosci obiektu "Fig".
+int main(){
+Kwadrat Kw;
+FiguraGeometryczna Fig;
+Kw.ZmienDlugosc(10).UzyjFigure().UzyjPole() = 5;
+}
+  </Tresc>
+        <Odpowiedz>false</Odpowiedz>
+        <Notatka>operacje wykonywane sa na obiekcie typu kwadrat i nalezacym do niego
+obiekcie FiguraGeometryczna. Nijak ma sie to do obiektu o nazwie Fig.
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>... przedstawiony ponizej kod programu nigdy nie spowoduje zmiany zawartosci
+obiektu "Fig".
+int main(){
+Kwadrat Kw;
+FiguraGeometryczna Fig;
+Kw.ZmienDlugosc(10).UzyjFigure().UzyjPole() = 5;
+}
+  </Tresc>
+        <Odpowiedz>true</Odpowiedz>
+        <Notatka>Fig jest osobnym obiektem , ma sie nijak do obiektu Kw
+  </Notatka>
+      </Pytanie>
+    </Pytania>
+  </Problem>
+  <Problem>
+    <Kod />
+    <Opis>Niech bedzie dany nastepujacy fragment kodu
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;cctype&gt;
+#include &lt;cmath&gt;
+int main(){
+}
+Czy prawda jest, ze ...
+    </Opis>
+    <Pytania>
+      <Pytanie>
+        <Tresc>... zapis #include &lt;cmath&gt; powoduje, ze do programu dolaczany jest plik
+naglowkowy "cmath", ktory NIE moze byc uzyty w przypadku programow
+pisanych w jezyku C.
+  </Tresc>
+        <Odpowiedz>true</Odpowiedz>
+        <Notatka>cmath jest cplusplusowa wersja biblioteki math.h znanej z C
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>... zapis #include &lt;cmath&gt; powoduje, ze do programu zawsze dolaczany jest
+plik naglowkowy "math.h"
+  </Tresc>
+        <Odpowiedz>true</Odpowiedz>
+        <Notatka>Patrz naglówek cmath [u mnie linia 46 = #include “math.h”], a wiec
+zawsze
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>... zapis #include &lt;cctype&gt; odpowiada dolaczeniu pliku "type.h" gdy program
+pisany jest w jezyku C. Charakterystyczna cecha nazw odpowiednikow plikow z
+jezyka C jest dolaczenie na poczatku dwoch literek 'c'.
+  </Tresc>
+        <Odpowiedz>false</Odpowiedz>
+        <Notatka>cctype jest c++owa wersja ctype.h, tak jak cstring c++owa wersja string.h
+itd. Dolaczamy 1 literke “c” i wywalamy “.h”
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>... zapis #include &lt;string&gt; odpowiada dolaczeniu pliku "string". Plik ten NIE
+jest odpowiednikiem pliku naglowkowego "string.h" stosowanego w programach
+pisanych w jezyku C.
+  </Tresc>
+        <Odpowiedz>true</Odpowiedz>
+        <Notatka>C’owy plik string.h przechodzi na c++owy cstring. Sam string to inna
+biblioteka [dodaje obsluge stringów]
+  </Notatka>
+      </Pytanie>
+    </Pytania>
+  </Problem>
+  <Problem>
+    <Kod />
+    <Opis>Niech bedzie dany nastepujacy fragment kodu
+struct Pojazd {
+virtual void Wyswietl() const { cout &amp;lt;&amp;lt; "Pojazd" &amp;lt;&amp;lt; endl; }
+};
+struct Dzwig {
+virtual void Wyswietl() const { cout &amp;lt;&amp;lt; "Dzwig" &amp;lt;&amp;lt; endl; }
+};
+struct DzwigSamobiezny: public Pojazd, public Dzwig {
+void Wyswietl() const {
+cout &amp;lt;&amp;lt; "DzwigSamobiezny" &amp;lt;&amp;lt; endl;
+}
+};
+Zakladamy, ze powyzszy kod jest umieszczony we wlasciwym kontekscie
+i kompiluje sie bez ostrzezen. Czy prawda jest, ze ...
+
+    </Opis>
+    <Pytania>
+      <Pytanie>
+        <Tresc>... jest to przyklad dziedziczena wielobazowego. Wystepowanie metod wirtualnych
+nie ma zadnego znaczenia dla okreslenia typu dziedziczenia, tzn. czy jest to
+dziedziczenie jednobazowe czy tez wielobazowe.
+  </Tresc>
+        <Odpowiedz>true</Odpowiedz>
+        <Notatka>to ilu jest ono bazowe zawarte jest w linijce class CosTam : [O TUTAJ]
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>... metoda "Wyswietl()" w klasie "DzwigSamobiezny" jest metoda wirtualna.
+  </Tresc>
+        <Odpowiedz>true</Odpowiedz>
+        <Notatka>Jesli w klasie dziedziczonej jakas metoda jest virtual, to automatycznie w
+klasie dziedziczacej metody o tej samej nazwie staja sie virtual
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>... w przypadku kodu funkcji "main()":
+int main(){
+DzwigSamobiezny oDzwigSam;
+Pojazd &amp;oPojazd = oDzwigSam;
+Dzwig &amp;oDzwig = oDzwigSam;
+oPojazd.Wyswietl();
+oDzwig.Wyswietl();
+}
+Dla kazdej z referencji (tzn. "oPojazd" i "oDzwigSam") wywolaja sie rozne
+metody "Wyswietl()".
+  </Tresc>
+        <Odpowiedz>false</Odpowiedz>
+        <Notatka>2 razy wyswietli sie “Dzwig samobiezny”
+  </Notatka>
+      </Pytanie>
+    </Pytania>
+  </Problem>
+  <Problem>
+    <Kod />
+    <Opis>Niech bedzie dana definicja klasy i zapowiedz definicji funkcji:
+struct Wektor {
+float x, y;
+};
+void Dzialanie(const Wektor&amp; W);
+Zakladamy, ze powyzszy kod jest umieszczony we wlasciwym kontekscie
+i kompiluje sie bez ostrzezen. Czy prawda jest, ze ...
+
+    </Opis>
+    <Pytania>
+      <Pytanie>
+        <Tresc>... wywolanie funkcji "Dzialanie" w ponizszym kodzie
+int main(){
+Wektor Wekt;
+Dzialanie(Wekt);
+}
+spowoduje uruchomienie konstruktora kopiujacego dla obiektu "Wekt".
+  </Tresc>
+        <Odpowiedz>false</Odpowiedz>
+        <Notatka>wektor jest przekazywany przez referencje
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>... wywolanie funkcji "Dzialanie" w ponizszym kodzie kod j.w. nie daje gwarancji,
+ze obiekt "Wekt" nie zostanie zmodyfikowany, gdyz w funkcji "Dzialanie" moga
+byc np. rzutowania.
+  </Tresc>
+        <Odpowiedz>true</Odpowiedz>
+        <Notatka>mozna obejsc modyfikator const za pomoca const_casta
+  </Notatka>
+      </Pytanie>
+    </Pytania>
+  </Problem>
+  <Problem>
+    <Kod />
+    <Opis>Niech bedzie dany nastepujacy fragment kodu
+struct FiguraGeometryczna {
+virtual float ObliczPole() const {
+return 0;
+}
+private:
+int _Identyfikator;
+};
+struct Pojazd {
+virtual float PojemnoscSilnika() const {
+return 0;
+} virtual const char* MarkaPojazdu() const {
+return "Klasa bazowa";
+}
+private:
+int _Identyfikator;
+};
+Zakladamy, ze powyzszy kod jest umieszczony we wlasciwym kontekscie
+i kompiluje sie bez ostrzezen. Czy prawda jest, ze ...
+
+    </Opis>
+    <Pytania>
+      <Pytanie>
+        <Tresc>... rozmiar obiektow klasy "FiguraGeometryczna" i klasy "Pojazd" jest taki sam.
+Na rozmiar obiektow tych klas ma wplyw wystepowanie metod wirtualnych, tzn.
+czy w danej klasie wystepuje jakakolwiek metoda wirtualna, czy tez nie ma ich w
+ogole.
+  </Tresc>
+        <Odpowiedz>true</Odpowiedz>
+        <Notatka />
+      </Pytanie>
+      <Pytanie>
+        <Tresc>... rozmiar obiektow klasy "FiguraGeometryczna" i "Pojazd" jest zalezny od ilosci
+wystepujacych w nich metod wirtualnych. Zakladamy, ze obie klasy maja co
+najmniej jedna metode wirtualna
+  </Tresc>
+        <Odpowiedz>false</Odpowiedz>
+        <Notatka>na rozmiar ma wplyw tylko to czy jest metoda wirtualna , a nie ile ich jest
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>... rozmiar obiektow zarowno klasy "FiguraGeometryczna", jak tez klasy "Pojazd"
+jest rowny sumie rozmiarow pol, ktore wystepuja w danym obiekcie. W tym
+przypadku jest to rozmiar pola "_Identyfikator". Rozmiar obiektow nie zalezy
+od ilosci metod, ktore dana klasa posiada. Zakladamy, ze obie klasy maja co
+najmniej jedna metode wirtualna.
+  </Tresc>
+        <Odpowiedz>true</Odpowiedz>
+        <Notatka />
+      </Pytanie>
+      <Pytanie>
+        <Tresc>... ilosc metod wirtualnych moze miec wplyw na rozmiar tablicy VTABLE (tablica
+adresow metod wirtualnych). Mimo to rozmiar obiektow obu klas bedzie rowny.
+Zakladamy, ze obie klasy maja co najmniej jedna metode wirtualna.</Tresc>
+        <Odpowiedz>true</Odpowiedz>
+        <Notatka />
+      </Pytanie>
+    </Pytania>
+  </Problem>
+  <Problem>
+    <Kod />
+    <Opis>Niech bedzie dany nastepujacy fragment kodu
+struct FiguraGeometryczna {
+float ObliczPole() const {
+return 0;
+}
+private:
+int _Identyfikator;
+};
+struct Pojazd {
+float PojemnoscSilnika() const {
+return 0;
+} const char* MarkaPojazdu() const {
+return "Pojazd";
+}
+private:
+int _Identyfikator;
+};
+Zakladamy, ze powyzszy kod jest umieszczony we wlasciwym kontekscie
+i kompiluje sie bez ostrzezen. Czy prawda jest, ze ...
+
+    </Opis>
+    <Pytania>
+      <Pytanie>
+        <Tresc>... rozmiar obiektow klasy "FiguraGeometryczna" i "Pojazd" jest rowny. Moze sie
+jednak zmienic, gdy dopisane zostana definicje konstruktorow.
+  </Tresc>
+        <Odpowiedz>false</Odpowiedz>
+        <Notatka>rozmiar obiektów zalezy od pól w obiekcie, a nie metod
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>... rozmiar obiektow klas "FiguraGeometryczna" i "Pojazd" nie zalezy od ilosci
+metod zdefiniowanych w tych klasach. Zakladamy, ze nie sa to metody wirtualne.
+Moga to jednak byc metody z modyfikatorem "const" jakt tez bez niego.
+  </Tresc>
+        <Odpowiedz>true</Odpowiedz>
+        <Notatka>metody naleza do klasy, a pola do obiektu [przynajmniej tak to mozna
+rozumiec]
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>... rozmiar obiektow klas "FiguraGeometryczna" i "Pojazd" zalezy od sposobu
+zdefiniowania metod, tzn. bedzie inny, gdy pelna definicja metody znajdzie sie
+poza cialem klasy. W przedstawionym przypadku metody beda rozwijane "w linii".
+  </Tresc>
+        <Odpowiedz>false</Odpowiedz>
+        <Notatka>Rozmiar nie zalezy od miejsca definicji. Funkcja to funckja (czy tam metoda)
+zawsze ma adres.
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>... rozmiar obiektow klas "FiguraGeometryczna" i "Pojazd" jest zdeterminowany
+tylko i wylacznie rozmiarem pol znajdujacych sie w klasie i nie zalezy od ich
+nazwy. W tym przypadku chodzi o pola "_Identyfikator".
+  </Tresc>
+        <Odpowiedz>true</Odpowiedz>
+        <Notatka>nazwy sa “dla czlowieka”, komputer i tak ich nie przechowuje po kompilacji
+  </Notatka>
+      </Pytanie>
+    </Pytania>
+  </Problem>
+  <Problem>
+    <Kod />
+    <Opis>Niech bedzie dany nastepujacy fragment kodu
+struct FiguraGeometryczna {
+virtual float ObliczPole() const {
+return 0;
+}
+};
+struct Kwadrat: public FiguraGeometryczna {
+virtual float ObliczPole() const {
+return _DlugoscBoku*_DlugoscBoku;
+} virtual ~
+Kwadrat() {
+}
+protected:
+float _DlugoscBoku;
+};
+Zakladamy, ze powyzszy kod jest umieszczony we wlasciwym kontekscie
+i kompiluje sie bez ostrzezen. Czy prawda jest, ze ...
+
+    </Opis>
+    <Pytania>
+      <Pytanie>
+        <Tresc>... operacja przedstawiona ponizej jest poprawna i nie spowoduje blednego
+dzialania programu.
+FiguraGeometryczna *wFig = new Kwadrat();
+delete wFig;
+  </Tresc>
+        <Odpowiedz>true</Odpowiedz>
+        <Notatka>new Kwadrat() tworzy obiekt typu Kwadrat i zwraca wskaznik, który potem
+jest rzutowany w góre
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>... dla zmiennej wskaznikowej typu FiguraGeometryczna*, ktora wskazuje na
+obiekt lub podobiekt zawarty w innym obiekcie w sensie dziedziczenia zgodnie z
+prezentowana definicja klasy Kwadrat, wykonanie operacji:
+Pole = wFig-&gt;ObliczPole();
+moze spowodowac, ze w zmiennej "Pole" bedzie wartosc rozna od 0.
+  </Tresc>
+        <Odpowiedz>true</Odpowiedz>
+        <Notatka>na tym polega mechanizm funkcji wirtualnych
+  </Notatka>
+      </Pytanie>
+    </Pytania>
+  </Problem>
+  <Problem>
+    <Kod />
+    <Opis>Niech bedzie dany nastepujacy fragment kodu
+struct Wektor {
+float x, y;
+Wektor() {
+x = y = 0;
+} const float Norma() {
+return sqrt(x*x+y*y);
+}
+};
+Zakladamy, ze powyzszy kod jest umieszczony we wlasciwym kontekscie
+i kompiluje sie bez ostrzezen. Czy prawda jest, ze ...
+    </Opis>
+    <Pytania>
+      <Pytanie>
+        <Tresc>... uzycie modyfikatora "const" w metodzie "Norma" na jej poczatku informuje o
+tym, ze metoda bedzie mogla zostac wywolana dla obiektow stalych, tzn.
+const Wektor W;
+W.Norma();
+  </Tresc>
+        <Odpowiedz>false</Odpowiedz>
+        <Notatka>zwróci tylko const floata, zeby tak bylo const musialby znalezc sie po
+Norma()
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>... przedstawione ponizej podstawienie jest poprawne i pomimo tego, ze
+metoda "Norma" zwraca stala wartosc, to wartosc zmiennej "Dlugosc" moze byc
+zmieniana.
+const Wektor W;
+float Dlugosc = W.Norma();
+  </Tresc>
+        <Odpowiedz>false</Odpowiedz>
+        <Notatka>na obiektach const mozna wykonywac tylko metody z constem
+  </Notatka>
+      </Pytanie>
+    </Pytania>
+  </Problem>
+  <Problem>
+    <Kod />
+    <Opis>Niech bedzie dany nastepujacy fragment kodu
+struct Wektor {
+float x, y;
+inline float Norma() const { return sqrt(x*x+y*y); }
+};
+Zakladamy, ze powyzszy kod jest umieszczony we wlasciwym kontekscie
+i kompiluje sie bez ostrzezen. Czy prawda jest, ze ...
+    </Opis>
+    <Pytania>
+      <Pytanie>
+        <Tresc>... gdy kod metody jest rozwijany "w linii", to wielkosc obiektu tej klasy bedzie
+mniejsza niz w przypadku, gdy klasa ta zostanie zdefiniowana bez tej metody.
+  </Tresc>
+        <Odpowiedz>false</Odpowiedz>
+        <Notatka>Taka sama. I tak czy siak ma adres i wszelkie wlasciwosci funckji/metody
+wiec sie nic nie zmienia
+
+  </Notatka>
+      </Pytanie>
+    </Pytania>
+  </Problem>
+  <Problem>
+    <Kod />
+    <Opis>W przypadku definiowania metod wirtualnych generowane sa przez
+kompilator dodatkowe zestawy danych, ktore umozliwiaja realizacje
+w praktyce idei polimorfizmu (wielopostaciowosci). Jezeli w danym
+programie zdefiniowane sa WYLACZNIE klasy z metodami wirtualnymi, to
+czy prawdziwe jest nastepujace stwierdzenie?
+    </Opis>
+    <Pytania>
+      <Pytanie>
+        <Tresc>Po uruchomieniu takiego programu, tworzone sa tablice metod wirtualnych.
+Tablice te sa tworzone w sposob dynamiczny osobno dla kazdego obiektu. Dzieki
+temu z kazdym obiektem skojarzona jest unikalna tablica metod wirtualnych.
+  </Tresc>
+        <Odpowiedz>true</Odpowiedz>
+        <Notatka>tablica funkcji wirtualnych, ktora przechowuje ich adresy, kazdy obiekt
+zawiera wskaznik do tablicy adresów wszystkich funkcji
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>Obiekty klas, posiadaja w sposob niejawny wbudowany dodatkowy wskaznik,
+ktory jest wskaznikiem na tablice metod wirtualnych. Tablica taka ma zawsze taki
+sam zestaw adresow metod wirtualnych dla kazdego obiektu danej klasy.
+  </Tresc>
+        <Odpowiedz>true</Odpowiedz>
+        <Notatka>jak wyzej. Dlatego na rozmiar obiektu ma wplyw obecnosc 0 lub
+jakiejkolwiek innej ilosci metod wirtualnych
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>Zawsze z obiektem klasy skojarzony jest wskaznik na tablice metod wirtualnych.
+Wskaznik ten nie jest jawnie dostepny i nie ma mozliwosci odczytania adresu
+tablicy. Gdyby byla taka mozliwosc, to mogloby to skutkowac proba dostepu i
+modyfikacji obszaru pamieci, ktory nie moze byc modyfikowany.
+  </Tresc>
+        <Odpowiedz>true</Odpowiedz>
+        <Notatka>nigdzie nie ma informacji o mozliwosci modyfikacji; wskaznik jest ukryty w
+obiekcie i nie ma do niego dostepu
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>Istnienie w obiekcie adresu do tablicy metod wirtualnych pozwala na rozroznienie
+przypadku, gdy obiekt zostal utworzony jako samodzielna odrebna calosc, np.
+poprzez definicje:
+FiguraGeometryczna Fig;
+czy tez jest elementem skladowym innego obiektu.
+  </Tresc>
+        <Odpowiedz>false</Odpowiedz>
+        <Notatka>istnienie tego adresu sprawia ze pobierane sa adresy zadanych funkcji, w
+zaden sposób nie mozna na podstawie wskaznika rozróznic sposobu utworzenia
+obiektu (?)
+  </Notatka>
+      </Pytanie>
+    </Pytania>
+  </Problem>
+  <Problem>
+    <Kod />
+    <Opis>Niech beda dane nastepujace definicje klas:
+class Tablica {
+protected:
+float *_wTab;
+int _Rozmiar;
+public:
+Tablica(int Rozmiar): _Rozmiar(Rozmiar) {
+_wTab = new float[_Rozmiar];
+} virtual float operator [] (
+int Indeks )
+const {
+return _wTab[Indeks];
+}
+};
+class TablicaPochodna: public Tablica {
+public:
+TablicaPochodna(int Rozmiar): Tablica(Rozmiar) {}
+float&amp; operator [] ( int Indeks ) {
+return _wTab[Indeks];
+}
+};
+Zakladamy, ze powyzszy kod jest umieszczony we wlasciwym kontekscie
+i kompiluje sie bez zadnych ostrzezen. Czy prawda jest, ze ...
+    </Opis>
+    <Pytania>
+      <Pytanie>
+        <Tresc>w przypadku ponizej definicji funkcji main:
+int main() {
+Tablica &amp;Tab = TablicaPochodna(2);
+Tab[1] = 1;
+}
+nie mozna wykonac podstawienia "Tab[1] = 1", gdyz klasa "Tablica" dysponuje
+przeciazeniem operatora indeksujacego, ktory nie daje mozliwosci modyfikacji
+obiektu. Fakt, ze jest to wirtualna metoda operatorowa nie ma tu zadnego
+znaczenia.
+  </Tresc>
+        <Odpowiedz>true</Odpowiedz>
+        <Notatka>wywolane przeciazenie pochodzi z Tablica, ale zwraca consta, a nie
+referencje wiec nic nie da sie zrobic
+
+  </Notatka>
+      </Pytanie>
+    </Pytania>
+  </Problem>
+  <Problem>
+    <Kod />
+    <Opis>Niech bedzie dana nastepujaca definicja klasy:
+class LZespolona {
+public:
+float re, im;
+LZespolona( float re, float im );
+LZespolona( float re );
+};
+Zakladamy, ze powyzszy kod jest umieszczony we wlasciwym kontekscie
+i kompiluje sie bez zadnych ostrzezen. Czy prawda jest, ze ...
+
+    </Opis>
+    <Pytania>
+      <Pytanie>
+        <Tresc>Definicja konstruktora w postaci:
+LZespolona::LZespolona( float re, float im ): re(re), im(im) {}
+aczkolwiek skompiluje sie poprawnie, to wartosci pol klasy nie zostana
+zainicjalizowane, gdyz nazwy parametrow przeslaniaja nazwy pol klasy.
+  </Tresc>
+        <Odpowiedz>false</Odpowiedz>
+        <Notatka>Co najwyzej w konstruktorze, aby odwolac sie do skladowej re, bedzie
+nalezalo zastosowac this-&gt;re. Z im podobnie.
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>Definicja konstruktora w postaci:
+LZespolona::LZespolona( float re, float im ){
+re = re; im = im;
+}
+aczkolwiek skompiluje sie poprawnie, to wartosci pol klasy nie zostana
+zainicjalizowane, gdyz nazwy parametrow przeslaniaja nazwy pol klasy.
+  </Tresc>
+        <Odpowiedz>true</Odpowiedz>
+        <Notatka>tutaj dochodzi do przesloniecia. Powinno byc this-&gt;re = re; this-&gt;im = im;
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>Definicja konstruktora w postaci:
+LZespolona::LZespolona( float re ): im(){
+LZespolona::re = re;
+}
+jest prawidlowa i gwarantuje jednoznaczne zainicjalizowanie obu pol klasy.
+  </Tresc>
+        <Odpowiedz>true</Odpowiedz>
+        <Notatka>re = zadana wartosc w konstruktorze, im = 0
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>Definicja konstruktora w postaci:
+LZespolona::LZespolona( float re ): im(){
+re = LZespolona::re;
+}
+jest prawidlowa i gwarantuje jednoznaczne zainicjalizowanie obu pol klasy.
+  </Tresc>
+        <Odpowiedz>false</Odpowiedz>
+        <Notatka>bo niezaincjalizowana zmienna z obiektu zapisujemy do zmiennej dostepnej
+wewnatrz funkcji (czyli tej która przekazujemy do konstuktora). Nic to nie da.
+
+  </Notatka>
+      </Pytanie>
+      <Pytanie>
+        <Tresc>Definicja konstruktora w postaci:
+LZespolona::LZespolona( float re ): re(re), im() {}
+nie gwarantuje poprawnej inicjalizacji pol klasy. Zapis nie jest jednoznaczny i nie
+mozna okreslic jakimi wartosciami zostana zainicjalizowane pola klasy.
+  </Tresc>
+        <Odpowiedz>false</Odpowiedz>
+        <Notatka>po tym konstruktorze re = przekazane re, a im = 0
+  </Notatka>
+      </Pytanie>
+    </Pytania>
+  </Problem>
+  <Problem>
+    <Kod />
+    <Opis>Niech dany bedzie fragment kodu:
+list&lt;double&gt; Lst(4);
+double *wskA = &amp;Lst.front();
+Lst.push_back(10);
+Zakladamy, ze powyzszy kod jest umieszczony we wlasciwym kontekscie i kompiluje sie bez
+zadnych ostrzezen.
+Czy prawda jest, ze …
+    </Opis>
+    <Pytania>
+      <Pytanie>
+        <Tresc>... wywolanie metody "push_back" spowoduje realokacje pamieci dla calej listy i dlatego po jej
+wykonaniu adres w zmiennej "wskA" moze juz nie byc adresem pierwszego elementu?
+  </Tresc>
+        <Odpowiedz>false</Odpowiedz>
+        <Notatka>realokacja dotyczy jedynie wektora. Lista trzyma element w tym samym miejscu pamieci do
+momentu jego usuniecia
+  </Notatka>
+      </Pytanie>
+    </Pytania>
+  </Problem>
+  <Problem>
+    <Kod />
+    <Opis>Dany jest fragment kodu:
+vector&lt;double&gt;
+Tab(5);
+double &amp;Zm = Tab[1];
+Tab.push_back(10);
+Zm = Tab[5];
+Zakladamy, ze powyzszy kod jest umieszczony we wlasciwym kontekscie i kompiluje sie bez
+zadnych ostrzezen.
+Czy prawda jest, ze …
+    </Opis>
+    <Pytania>
+      <Pytanie>
+        <Tresc>... po wykonaniu tego kodu zawsze zachodzi warunek:
+&amp;Zm == &amp;Tab[1]
+  </Tresc>
+        <Odpowiedz>false</Odpowiedz>
+        <Notatka>push_back() powoduje realokacje pamieci</Notatka>
+      </Pytanie>
+    </Pytania>
+  </Problem>
+</ArrayOfProblem>
